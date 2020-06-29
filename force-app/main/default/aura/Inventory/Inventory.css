@@ -1,0 +1,15 @@
+.THIS{
+    
+}
+.THIS .bookedButton{
+   background-color: #008000;
+   color: #fff; 
+}
+.THIS .reservedButton{
+   background-color: #32CD32;
+   color: #fff; 
+}
+.THIS .interestedButton{
+   background-color: #90EE90;
+   color: #fff; 
+}

@@ -1,0 +1,18 @@
+<template>
+    <lightning-layout horizontal-align="left" class="slds-grid slds-grid_align-left" style="margin-left: 15%;">
+        <!-- Dropdown for project Name selection -->
+        <lightning-layout-item padding="horizontal-small">
+            <lightning-combobox name="projectNames" label="Project" placeholder="Select project" value={projectSelectedValue} 
+            onchange={handleProjectNameChange} variant="label-hidden" options={projectNames} ></lightning-combobox>
+        </lightning-layout-item>
+        
+        <!-- Dropdown for tower Name selection -->
+        <template if:true={isProjectSelected}>
+            <lightning-layout-item padding="horizontal-small">
+                <lightning-combobox name="towerNames" label="Tower" placeholder="Select tower" value={towerSelectedValue} 
+                onchange={handleTowerNameChange} variant="label-hidden" options={towerNames} ></lightning-combobox>
+            </lightning-layout-item>
+        </template>
+
+    </lightning-layout>
+</template>

@@ -1,0 +1,63 @@
+<template>
+    <lightning-card title={carName} icon-name="utility:setup_assistant_guide">
+        <!-- <div slot="actions">
+            <lightning-button label="Full Details" onclick={fullDetails}></lightning-button>
+        </div> -->
+
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="12" small-device-size="6" medium-device-size="6" large-device-size="6">
+                <div class="slds-p-horizontal_small">
+                    <div class="carproperty">
+                        <span class="label">Project Name:</span>
+                        <lightning-formatted-text value={projectName}></lightning-formatted-text>
+                    </div>
+                    <div class="carproperty">
+                        <span class="label">Tower Name:</span>
+                        <lightning-formatted-text value={towerName}> </lightning-formatted-text>
+                    </div>
+                    <div class="carproperty">
+                        <span class="label">Flat Unit No:</span>
+                        <lightning-formatted-number value={unitNumber}> </lightning-formatted-number>
+                    </div>
+                    <div class="carproperty">
+                        <span class="label">Usable Area:</span>
+                        <lightning-formatted-number value={usableArea}> </lightning-formatted-number>
+                    </div>
+                    <div class="carproperty">
+                        <span class="label">Flat Cost:</span>
+                        <lightning-formatted-number value={flatCost} currency-code="USD"></lightning-formatted-number>
+                    </div>
+                    <div class="carproperty">
+                        <span class="label">Feature:</span>
+                        <lightning-formatted-text value={flatFeature}></lightning-formatted-text>
+                    </div>
+                    <!-- <div class="carproperty">
+                        <span class="label">Status:</span>
+                        <lightning-formatted-text value={status}></lightning-formatted-text>
+                    </div> -->
+
+                    <div horizontal-align="left" class="slds-grid slds-grid_align-left" style="margin-left: 5%; margin-top: 20px;">
+                        <div slot="actions">
+                            <lightning-button class="slds-button" label="Interested" onclick={handleAction}></lightning-button>
+                        </div>
+                        <div slot="actions" style="margin-left: 15px;">
+                            <lightning-button class="slds-button" label="Book" onclick={handleAction}></lightning-button>
+                        </div>
+                        <div slot="actions" style="margin-left: 15px;">
+                            <lightning-button class="slds-button" label="Reserve" onclick={handleAction}></lightning-button>
+                        </div>
+                    </div>
+
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="6" medium-device-size="6" large-device-size="6">
+
+                <lightning-formatted-rich-text class="car slds-align_absolute-center" value={flatPic}>
+                </lightning-formatted-rich-text>
+                <!-- <img src={pictureUrl} class="car slds-align_absolute-center" alt="Car Picture" /> -->
+            </lightning-layout-item>
+        </lightning-layout>
+
+
+    </lightning-card>
+</template>

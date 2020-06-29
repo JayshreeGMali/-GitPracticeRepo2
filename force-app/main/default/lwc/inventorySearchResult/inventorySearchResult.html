@@ -1,0 +1,20 @@
+<template>
+    <lightning-layout multiple-rows horizontal-align="center">
+        <!-- Gridview for Flats of particular tower inside a project, Iterating through a list -->
+        <template if:true={flatsFound}>
+            <template for:each={flats} for:item="flat">
+                <lightning-layout-item key={flat.Id} padding="around-small" size="12" small-device-size="3"
+                    large-device-size="4" medium-device-size="4">
+                    <!-- Grid Item for single flat as inventoryTile component-->
+                    <c-inventory-tile flat={flat} onprojectnameselect={flatSelectHandler} flat-selected-id={selectedFlatId}></c-inventory-tile>
+                </lightning-layout-item>
+            </template>
+        </template>
+        <!-- If no Flat found in SF DB -->
+        <template if:false={flatsFound}>
+            <div class="slds-align_absolute-center">
+                No flats Found
+            </div>
+        </template>
+    </lightning-layout>
+</template>

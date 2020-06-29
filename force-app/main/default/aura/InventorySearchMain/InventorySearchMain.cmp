@@ -1,0 +1,6 @@
+<aura:component implements="force:appHostable,force:lightningQuickActionWithoutHeader,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,lightning:isUrlAddressable">
+   <aura:attribute name="recdId" type="Id"/>
+    <aura:attribute name="pageReference" type="Object"/>
+    <lightning:navigation aura:id="navigationService"/>
+    <aura:handler name="init" action="{!c.navigateToinventorySearchCmp}" value="{!this}" />
+</aura:component>

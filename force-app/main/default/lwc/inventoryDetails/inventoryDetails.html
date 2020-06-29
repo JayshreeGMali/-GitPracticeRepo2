@@ -1,0 +1,21 @@
+<template>
+    <lightning-layout horizontal-align="left" class="slds-grid slds-grid_align-left" style="margin-left: 1%;">
+        <!-- Search and Result Section-->
+        
+        <lightning-layout-item padding="around-small" size="12" small-device-size="8"
+        large-device-size="8" medium-device-size="8">
+            <lightning-card >
+                <c-inventory-search></c-inventory-search>
+            </lightning-card>
+        </lightning-layout-item>
+   
+        <!-- Details section -->
+     
+        <lightning-layout-item padding="around-small" size="12" small-device-size="4"
+        large-device-size="4" medium-device-size="4">
+            <c-flat-details record-id={recordId}></c-flat-details>
+        </lightning-layout-item>
+   
+        
+    </lightning-layout>
+</template>

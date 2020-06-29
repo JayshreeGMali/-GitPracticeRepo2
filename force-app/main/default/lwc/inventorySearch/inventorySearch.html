@@ -1,0 +1,14 @@
+<template>
+    <!-- Component which contains a dropdown for project selection -->
+    <div class="slds-m-bottom_small">
+        <lightning-card title="Search Flat Here">
+            <c-inventory-search-form onprojectnameselect={projectNameSelectHandler} ontowernameselect={towerSelectHandler}></c-inventory-search-form>
+        </lightning-card>
+    </div>
+    <!--Component containing towers inside a selected project -->
+    <div class="slds-m-vertical_small">
+        <lightning-card title="Matching Flats">
+            <c-inventory-search-result project-name-id={projectNameId} tower-name={towerName}></c-inventory-search-result>
+        </lightning-card>
+    </div>
+</template>

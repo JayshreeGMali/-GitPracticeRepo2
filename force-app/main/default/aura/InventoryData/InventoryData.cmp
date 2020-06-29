@@ -1,0 +1,4 @@
+<aura:component implements="force:lightningQuickActionWithoutHeader,force:hasRecordId,lightning:isUrlAddressable">
+    <aura:attribute name="recId" type="String"/>
+   <c:inventoryDetails recordId="{!v.recId}"/>
+</aura:component>

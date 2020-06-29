@@ -1,0 +1,168 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader" controller="InventoryController" access="global" >
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="ObjectName" type="String" default="Customer_Inventory__c" access="global"/>
+    <aura:attribute name="Status" type="String" default="Status__c" access="global"/> 
+    <aura:attribute name="StatusPicklist" type="String[]" />
+    <aura:attribute name="InventoryObjectName" type="String" default="Inventory__c" access="global"/>
+    <aura:attribute name="Project" type="String" default="Project__c" access="global"/> 
+    <aura:attribute name="ProjectPicklist" type="String[]" />
+     <aura:attribute name="Tower" type="String" default="Tower__c" access="global"/> 
+    <aura:attribute name="TowerPicklist" type="String[]" />
+    
+      <aura:attribute name="opportunityId" type="String" access="global" />
+      <aura:attribute name="selectedinvId" type="String" access="global" />
+    <aura:attribute name="selectedstatus" type="String" access="global" />
+    
+    <aura:attribute name="floorList" type="List"/>
+    <aura:attribute name="housingMap" type="map"/>
+    
+     <aura:attribute type="Inventory__c[]" name="InventoryList"/>
+     <aura:attribute type="Inventory__c[]" name="selectInventoryList"/>
+    <aura:attribute name="displayedSection" type="string" default="hide"/>
+    <aura:attribute name="selectedflat" type="string" default=""/>
+    <aura:attribute name="selectedproj" type="string" default=""/>
+    <aura:attribute name="selectedtower" type="string" default=""/>
+    <aura:attribute name="statusMap" type="map"/>
+    <aura:attribute name="displayedFlatSection" type="string" default="hide"/>
+    
+    <aura:attribute name="listControllingValues" type="list" default="[]" description="to store controller field values"/>
+    <aura:attribute name="listDependingValues" type="list" default="['--- None ---']" description="to store dependent field values"/>
+    <aura:attribute name="depnedentFieldMap" type="map" description="map to store dependent values with controlling value"/>
+    <aura:attribute name="bDisabledDependentFld" type="boolean" default="true"/> 
+    
+    <aura:attribute name="objDetail" type="contact" default="{'sobjectType' : 'Inventory__c'}"/>
+    <aura:attribute name="controllingFieldAPI" type="string" default="Project__c" description="store field API name of Controller field"/>
+    <aura:attribute name="dependingFieldAPI" type="string" default="Tower__c" description="store field API name of dependent field"/>
+    
+<div class="slds-form" role="list">
+  <div class="slds-form__row">
+    <div class="slds-form__item" role="listitem">
+      <div class="slds-form-element slds-form-element_horizontal slds-is-editing">
+        <label class="slds-form-element__label" for="single-form-element-id-02">Project</label>
+        <div class="slds-form-element__control">
+            <!--<lightning:select name="Project" aura:id="Project" class="slds-input">
+               <aura:iteration items="{!v.ProjectPicklist}" var="val">
+                  <option value="{!val}"> {!val}</option>
+               </aura:iteration>
+           </lightning:select>-->
+            <lightning:select name="controllerFld"
+                          value="{!v.objDetail.Project__c}"
+                          
+                          onchange="{!c.onControllerFieldChange}">
+            <aura:iteration items="{!v.listControllingValues}" var="val">
+                <option value="{!val}">{!val}</option>
+            </aura:iteration>
+        </lightning:select>
+        </div>
+      </div>
+    </div>
+    <div class="slds-form__item" role="listitem">
+      <div class="slds-form-element slds-form-element_horizontal slds-is-editing">
+        <label class="slds-form-element__label" for="single-form-element-id-03">Tower</label>
+        <div class="slds-form-element__control">
+          <!--<lightning:select class="slds-input" name="Tower" aura:id="Tower" onchange="{!c.onTowerChange}">
+               <aura:iteration items="{!v.TowerPicklist}" var="val">
+                  <option value="{!val}"> {!val}</option>
+               </aura:iteration>
+           </lightning:select>-->
+            <lightning:select name="dependentFld" aura:id="Tower"
+                          value="{!v.objDetail.Tower__c}"
+                          onchange="{!c.onTowerChange}"
+                          disabled="{!v.bDisabledDependentFld}">
+            <aura:iteration items="{!v.listDependingValues}" var="val">
+                <option value="{!val}">{!val}</option>
+            </aura:iteration>
+        </lightning:select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div aura:id="Flatbox"  class="{!if(v.displayedFlatSection == 'show','slds-show','slds-hide')}"> 
+<aura:if isTrue="{!v.housingMap!=null}">    
+<table class="slds-table slds-table_cell-buffer slds-table_bordered">
+        <tr class="slds-line-height_reset">  
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col">Flats</th>
+        </tr>
+    <aura:iteration items="{!v.housingMap}" var="floor" indexVar="key">
+            <tr class="slds-hint-parent" >
+               <td scope="row"> Floor - {!floor.key}</td>
+                <aura:if isTrue="{!v.housingMap!=null}">
+                  <aura:iteration items="{!floor.value}" var="mapValue">
+                    <!--<th scope="row" >
+                      <h1><a id="{!mapValue}" onclick="{!c.displaydata}">{!mapValue}</a></h1></th>-->
+                      <!--<th scope="row" onclick="{!c.displaydata}" value="{!mapValue}"> {!mapValue}</th>-->
+                     <!--     <th scope="row"> <lightning:button class="action-btns" value="{!mapValue}" variant="neutral" label="{!mapValue}" onclick="{!c.displaydata}"/></th>-->
+                    <th scope="row">{!mapValue}</th>
+                    </aura:iteration>
+              </aura:if>
+            </tr>
+   </aura:iteration>
+</table>
+</aura:if>
+</div> 
+       
+    
+ <br/>    
+<div aura:id="Modalbox"  class="{!if(v.displayedSection == 'show','slds-show','slds-hide')}"> 
+ <div class="slds-form slds-border_top slds-border_left slds-border_bottom slds-border_right" role="list">
+    <aura:iteration items="{!v.selectInventoryList}" var="flatValue">
+        <div class="demo-only demo-only--sizing slds-grid slds-wrap">
+        <div class="slds-size_1-of-1 slds-text-align_center"> <b>Flat Information </b></div> 
+      <div class="slds-size_1-of-6"></div>      
+  <div class="slds-size_1-of-6 slds-text-align_left">
+      <label class="slds-form-element__label" for="single-form-element-id-02">Floor</label>
+  </div>
+  <div class="slds-size_1-of-6 slds-text-align_left">
+      <label class="slds-form-element__label" for="single-form-element-id-02">{!flatValue.Floor__c}</label>
+</div>
+<div class="slds-size_1-of-6 slds-text-align_left">
+    <label class="slds-form-element__label" for="single-form-element-id-02">Flat No</label>
+ </div>
+<div class="slds-size_1-of-6 slds-text-align_left">
+    <label class="slds-form-element__label" for="single-form-element-id-02">{!flatValue.Unit_No__c}</label>
+  </div>
+<div class="slds-size_1-of-6"></div>
+<div class="slds-size_1-of-6"></div>            
+ <div class="slds-size_1-of-6 slds-text-align_left">
+     <label class="slds-form-element__label" for="single-form-element-id-02">Area</label>
+  </div>
+  <div class="slds-size_1-of-6 slds-text-align_left">
+      <label class="slds-form-element__label" for="single-form-element-id-02">{!flatValue.Usable_Area__c} &nbsp;Sqft
+      </label>
+  </div>
+<div class="slds-size_1-of-6 slds-text-align_left">
+    <label class="slds-form-element__label" for="single-form-element-id-02">Cost</label>
+  </div>
+<div class="slds-size_1-of-6 slds-text-align_center">
+    <label class="slds-form-element__label " for="single-form-element-id-02">{!flatValue.Flat_Cost__c} &nbsp;INR
+    
+    </label>
+</div>
+<div class="slds-size_1-of-6"></div>
+    <div class="slds-size_1-of-5"> </div>       
+   <div class="slds-size_1-of-5">
+    <div class="slds-text-align_center slds-m-around_x-small"><lightning:button aura:id="InterestedId"
+                                  label="Interested" name="Interested" value="Interested"  
+                                  onclick="{!c.insertinvdata}"/></div>
+  </div>
+<div class="slds-size_1-of-5">
+    <div class="slds-text-align_center slds-m-around_x-small"><lightning:button aura:id="BookedId"
+                                  label="Booked" name="Booked"  value="Booked"  
+                                  onclick="{!c.insertinvdata}"/></div>
+  </div>
+<div class="slds-size_1-of-5">
+    <div class="slds-text-align_center slds-m-around_x-small"><lightning:button aura:id="ReservedId"
+                                  label="Reserved" name="Reserved"  value="Reserved"  
+                                  onclick="{!c.insertinvdata}"/></div>
+</div>
+<div class="slds-size_1-of-5"> </div>         
+</div>         
+</aura:iteration>
+   
+</div>  
+</div>
+</aura:component>

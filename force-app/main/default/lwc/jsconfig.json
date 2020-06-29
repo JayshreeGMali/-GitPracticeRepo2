@@ -1,0 +1,44 @@
+{
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "baseUrl": ".",
+        "paths": {
+            "c/inventoryTile": [
+                "inventoryTile/inventoryTile.js"
+            ],
+            "c/flatDetails": [
+                "flatDetails/flatDetails.js"
+            ],
+            "c/inventorySearch": [
+                "inventorySearch/inventorySearch.js"
+            ],
+            "c/flatDetail": [
+                "flatDetail/flatDetail.js"
+            ],
+            "c/inventoryDetails": [
+                "inventoryDetails/inventoryDetails.js"
+            ],
+            "c/inventorySeachForm": [
+                "inventorySeachForm/inventorySeachForm.js"
+            ],
+            "c/inventorySearchResult": [
+                "inventorySearchResult/inventorySearchResult.js"
+            ],
+            "c/inventorySearchForm": [
+                "inventorySearchForm/inventorySearchForm.js"
+            ],
+            "c/pubsub": [
+                "pubsub/pubsub.js"
+            ]
+        }
+    },
+    "include": [
+        "**/*",
+        "../../../../.sfdx/typings/lwc/**/*.d.ts"
+    ],
+    "typeAcquisition": {
+        "include": [
+            "jest"
+        ]
+    }
+}

@@ -1,0 +1,63 @@
+<template>
+    <a onclick={handleFlatSelect} >
+        
+        <div class={isFlatSelected}>
+
+            <div class="picBoundry">
+                <!-- <img src="https://dreamreality-dev-ed--c.documentforce.com/servlet/rtaImage?eid=a004S000000rFPN&amp;feoid=00N4S000000UJKK&amp;refid=0EM4S000000gRhm" class="car slds-align_absolute-center" alt="Flat Picture" > -->
+                <lightning-formatted-rich-text class="flat slds-align_absolute-center" value={flat.floorPlanImage__c}>
+                </lightning-formatted-rich-text>
+            </div>
+            <!-- <div>
+                 <p class="title slds-align_absolute-center">
+                     {flat.Tower__c} - {flat.Flat_feature__c}
+                </p> 
+            </div> -->
+                <lightning-layout class="status slds-align_absolute-center" horizontal-align="center">
+                    <template if:true={isInterested}>
+                        <lightning-layout-item>
+                            <svg id="dotInterested" height="25" width="25" class="slds-align_absolute-right">
+                                <circle cx="12" cy="12" r="10" stroke="white" stroke-width="2" fill="green" />
+                                </svg>
+                        </lightning-layout-item>
+                        <!-- <lightning-button variant="success" label={flat.Unit_No__c}   class="slds-m-left_x-small"></lightning-button> -->
+                    </template>
+                    <template if:true={isBooked}>
+                        <lightning-layout-item>
+                            <svg id="dotBooked" height="25" width="25" class="slds-align_absolute-right">
+                                <circle cx="12" cy="12" r="10" stroke="white" stroke-width="2" fill="red" />
+                                </svg>
+                        </lightning-layout-item>
+                        <!-- <lightning-button variant="destructive" label={flat.Unit_No__c}   class="slds-m-left_x-small"></lightning-button> -->
+                    </template>
+                    <template if:true={isReserved}>
+                        <lightning-layout-item>
+                            <svg id="dotReserved" height="25" width="25" class="slds-align_absolute-right">
+                                <circle cx="12" cy="12" r="10" stroke="white" stroke-width="2" fill="orange" />
+                                </svg>
+                        </lightning-layout-item>
+                    </template>
+                    <lightning-layout-item>
+                        <p class="statusTitle slds-align_absolute-end">
+                            {flat.Unit_No__c}
+                        </p>
+                    </lightning-layout-item>
+                    <template if:true={isStatusEmpty}>
+                        <lightning-layout-item>
+                            <svg id="dotEmpty" height="25" width="25" class="slds-align_absolute-right">
+                                <circle cx="12" cy="12" r="10" stroke="white" stroke-width="2" fill="white" />
+                                </svg>
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
+
+            
+
+            <div class="tooltiptext">
+                <lightning-formatted-text value={getTooltipStatement}> </lightning-formatted-text>
+            </div>
+
+        </div> 
+
+    </a>
+</template>

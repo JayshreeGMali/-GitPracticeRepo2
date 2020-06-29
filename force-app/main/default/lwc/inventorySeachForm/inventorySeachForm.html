@@ -1,0 +1,16 @@
+<template>
+    <lightning-layout horizontal-align="center">
+        <!-- Dropdown for project Name selection -->
+        <lightning-layout-item padding="horizontal-small">
+            <lightning-combobox name="projectNames" label="Project" placeholder="Select project" value={projectSelectedValue} 
+            onchange={handleProjectNameChange} variant="label-hidden" options={projectNames} ></lightning-combobox>
+        </lightning-layout-item>
+
+        <!-- Dropdown for tower Name selection -->
+        <lightning-layout-item padding="horizontal-small">
+            <lightning-combobox name="towerNames" label="Tower" placeholder="Select tower" value={towerSelectedValue} 
+            onchange={handleTowerNameChange} variant="label-hidden" options={towersArray} ></lightning-combobox>
+        </lightning-layout-item>
+
+    </lightning-layout>
+</template>
